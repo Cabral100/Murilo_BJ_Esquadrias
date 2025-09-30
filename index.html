@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
     <title>Portfólio Murilo - Vendedor | BJ Esquadrias</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/all.css">
     
     <style>
         /* --- CONFIGURAÇÕES GLOBAIS E VARIÁVEIS DE COR --- */
@@ -28,6 +29,37 @@
         body { background-color: var(--color-light-gray); color: var(--color-text); font-family: var(--font-body); line-height: 1.6; overflow-x: hidden; }
         body.no-scroll { overflow: hidden; }
 
+        /* --- NOVA PÁGINA DE LOADING --- */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--color-white);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.7s ease, visibility 0.7s ease;
+            visibility: visible;
+            opacity: 1;
+        }
+        #preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .preloader-logo {
+            max-width: 250px;
+            width: 60%;
+            animation: pulse-logo 1.5s infinite ease-in-out;
+        }
+        @keyframes pulse-logo {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
         /* --- ANIMAÇÕES DE SCROLL --- */
         .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; will-change: opacity, transform; }
         .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
@@ -38,8 +70,8 @@
         /* --- HEADER (CABEÇALHO) --- */
         .site-header { position: fixed; top: 0; left: 0; right: 0; background: var(--color-white); z-index: 1000; padding: 0.5rem 2rem; transition: background-color 0.3s ease, box-shadow 0.3s ease; }
         .site-header.scrolled { box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
-        .header-content { display: flex; justify-content: space-between; align-items: center; max-width: 1300px; margin: 0 auto; height: 160px; /* Altura aumentada */ }
-        .header-logo { height: 150px; /* Tamanho do logo aumentado */ width: auto; }
+        .header-content { display: flex; justify-content: space-between; align-items: center; max-width: 1300px; margin: 0 auto; height: 160px; }
+        .header-logo { height: 150px; width: auto; }
         .nav-menu { display: flex; list-style: none; gap: 2rem; }
         .nav-menu a { color: var(--color-text); text-decoration: none; font-weight: 500; transition: color 0.3s ease; position: relative; padding-bottom: 5px; }
         .nav-menu a:hover { color: var(--color-orange); }
@@ -48,10 +80,10 @@
 
         /* --- MENU MOBILE --- */
         .mobile-menu-toggle { display: none; background: none; border: none; color: var(--color-text); font-size: 1.8rem; cursor: pointer; z-index: 1002; }
-        .mobile-menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.98); backdrop-filter: blur(5px); z-index: 1001; display: flex; flex-direction: column; justify-content: center; align-items: center; transform: translateX(100%); transition: transform 0.4s ease-in-out; }
+        .mobile-menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--color-white); z-index: 1001; display: flex; flex-direction: column; justify-content: center; align-items: center; transform: translateX(100%); transition: transform 0.4s ease-in-out; }
         .mobile-menu-overlay.active { transform: translateX(0); }
         .mobile-menu-close { position: absolute; top: 2rem; right: 2rem; background: none; border: none; color: var(--color-text); font-size: 2.5rem; cursor: pointer; }
-        .mobile-menu-logo { height: 150px; /* Logo mobile aumentado */ width: auto; margin-bottom: 3rem; }
+        .mobile-menu-logo { height: 150px; width: auto; margin-bottom: 3rem; }
         .mobile-nav-menu { list-style: none; text-align: center; }
         .mobile-nav-menu li { margin: 1.8rem 0; }
         .mobile-nav-menu a { color: var(--color-text); text-decoration: none; font-size: 1.8rem; font-weight: 500; }
@@ -73,7 +105,7 @@
 
         /* --- SEÇÃO HERO --- */
         .hero-section { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('img/murilo1.png') no-repeat center center/cover; padding-top: 160px; color: var(--color-white); }
-        .hero-content { padding-top: 6rem; /* Manda o conteúdo mais para baixo na seção */ }
+        .hero-content { padding-top: 6rem; }
         .hero-content h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; margin-bottom: 0.5rem; }
         .hero-content .subtitle { font-size: clamp(1.2rem, 2.5vw, 1.5rem); font-weight: 300; color: var(--color-orange); margin-bottom: 1.5rem; }
         .hero-content p { font-size: clamp(1rem, 2vw, 1.1rem); max-width: 600px; margin: 0 auto 2.5rem auto; }
@@ -107,27 +139,15 @@
         .gallery-sticky-section .section-title { color: var(--color-text); }
         .gallery-sticky-container { display: flex; gap: 1rem; max-width: 1400px; margin: 0 auto; }
         .gallery-column { flex: 1; display: flex; flex-direction: column; gap: 1rem; padding-top: 6rem; padding-bottom: 6rem; }
-        .gallery-column.sticky { position: sticky; top: 160px; /* Altura do header ajustada */ height: 100vh; justify-content: center; }
+        .gallery-column.sticky { position: sticky; top: 160px; height: 100vh; justify-content: center; }
         .gallery-column figure { margin: 0; width: 100%; }
         .gallery-column img { width: 100%; height: auto; object-fit: cover; border-radius: 5px; }
         .gallery-column.sticky img { height: 100%; max-height: 30vh; }
         
         /* --- NOVA SEÇÃO SAIBA MAIS --- */
-        .saiba-mais-section {
-            background-color: var(--color-dark-gray);
-            color: var(--color-white);
-            text-align: center;
-        }
-        .saiba-mais-section h2 {
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-        .saiba-mais-section p {
-            max-width: 600px; 
-            margin: 0 auto 2.5rem auto; 
-            color: #ccc;
-        }
+        .saiba-mais-section { background-color: var(--color-dark-gray); color: var(--color-white); text-align: center; }
+        .saiba-mais-section h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 600; margin-bottom: 1.5rem; }
+        .saiba-mais-section p { max-width: 600px; margin: 0 auto 2.5rem auto; color: #ccc; }
 
         /* --- NOVA SEÇÃO DE CONTATO --- */
         .contact-section { background-color: var(--color-white); }
@@ -147,7 +167,7 @@
 
         /* --- NOVA SEÇÃO MAPA --- */
         .map-section { background-color: var(--color-light-gray); }
-        .map-container { position: relative; width: 100%; overflow: hidden; padding-top: 45%; /* Aspect Ratio Desktop */ }
+        .map-container { position: relative; width: 100%; overflow: hidden; padding-top: 45%; }
         .map-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
         /* --- SEÇÃO FAQ --- */
@@ -180,25 +200,31 @@
             .about-text .section-title::after { left: 50%; transform: translateX(-50%); }
             .gallery-columns { columns: 2; }
             .gallery-sticky-container { flex-direction: column; }
+            .gallery-sticky-container .gallery-column { padding-top: 1rem; padding-bottom: 1rem; }
             .gallery-column.sticky { position: static; height: auto; }
             .contact-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 768px) {
-            .header-content { height: 100px; /* Altura do header mobile */ }
-            .header-logo { height: 90px; /* Logo do header mobile */ }
+            .header-content { height: 110px; }
+            .header-logo { height: 100px; }
             .nav-menu { display: none; }
             .mobile-menu-toggle { display: block; }
             section { padding: 4rem 1.5rem; }
-            .hero-section { padding-top: 100px; }
+            .hero-section { padding-top: 110px; }
             .hero-content { padding-top: 2rem; }
             .gallery-columns { columns: 1; }
+            .about-bj-section { background-attachment: scroll; }
             .faq-bg-container {padding: 4rem 1.5rem;}
             .contact-info-panel, .contact-form-panel { padding: 2rem; }
-            .map-container { padding-top: 75%; /* Proporção 4:3 para o mapa no mobile */ }
+            .map-container { padding-top: 75%; }
         }
     </style>
 </head>
 <body>
+
+    <div id="preloader">
+        <img src="img/bj_logo.png" alt="Logo BJ Esquadrias" class="preloader-logo" decoding="async">
+    </div>
 
     <header class="site-header">
         <div class="header-content">
@@ -215,12 +241,12 @@
                 </ul>
             </nav>
             
-            <button class="mobile-menu-toggle" aria-label="Abrir Menu"> <i class="fas fa-bars"></i> </button>
+            <button class="mobile-menu-toggle" aria-label="Abrir Menu"> <i class="fa-solid fa-bars"></i> </button>
         </div>
     </header>
 
     <div class="mobile-menu-overlay">
-        <button class="mobile-menu-close" aria-label="Fechar Menu"><i class="fas fa-times"></i></button>
+        <button class="mobile-menu-close" aria-label="Fechar Menu"><i class="fa-light fa-xmark"></i></button>
         <img src="img/bj_logo.png" alt="Logo BJ Esquadrias" class="mobile-menu-logo" decoding="async">
         <nav>
             <ul class="mobile-nav-menu">
@@ -234,8 +260,8 @@
         </nav>
     </div>
 
-    <button id="backToTopBtn" title="Voltar ao topo"><i class="fas fa-arrow-up"></i></button>
-    <a href="https://wa.me/5511947550559" class="whatsapp-float" target="_blank" aria-label="WhatsApp"> <i class="fab fa-whatsapp"></i> </a>
+    <button id="backToTopBtn" title="Voltar ao topo"><i class="fa-solid fa-arrow-up"></i></button>
+    <a href="https://wa.me/5511947550559" class="whatsapp-float" target="_blank" aria-label="WhatsApp"> <i class="fa-brands fa-whatsapp"></i> </a>
     
     <main>
         <section class="hero-section" id="home">
@@ -318,15 +344,15 @@
                     <div class="contact-info-panel">
                         <h2>Entre em Contato</h2>
                         <div class="contact-info-item">
-                            <i class="fab fa-whatsapp"></i>
+                            <i class="fa-brands fa-whatsapp"></i>
                             <span>(11) 94755-0559</span>
                         </div>
                         <div class="contact-info-item">
-                            <i class="fas fa-envelope"></i>
+                            <i class="fa-solid fa-envelope"></i>
                             <span>comercial@bjesquadrias.com.br</span>
                         </div>
                          <div class="contact-info-item">
-                            <i class="fas fa-map-marker-alt"></i>
+                            <i class="fa-solid fa-map-marker-alt"></i>
                             <span>Mogi das Cruzes, São Paulo</span>
                         </div>
                     </div>
@@ -356,7 +382,7 @@
              <div class="container">
                 <div class="section-title-wrapper animate-on-scroll"> <h2 class="section-title">Onde nos Encontrar</h2> </div>
                 <div class="map-container animate-on-scroll delay-1">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3658.237847332463!2d-46.205402299999996!3d-23.5239463!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cdd808c219a4b5%3A0x6d94e98c6b1369f0!2sBJ%20ESQUADRIAS%20DE%20ALUMINIO!5e0!3m2!1spt-BR!2sbr!4v1759253454369!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>                </div>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3658.237847332463!2d-46.205402299999996!3d-23.5239463!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cdd808c219a4b5%3A0x6d94e98c6b1369f0!2sBJ%20ESQUADRIAS%20DE%20ALUMINIO!5e0!3m2!1spt-BR!2sbr!4v1759255228462!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>                </div>
              </div>
         </section>
 
@@ -379,15 +405,15 @@
                     <div class="section-title-wrapper animate-on-scroll"> <h2 class="section-title" style="color:var(--color-white);">Perguntas Frequentes</h2> </div>
                     <div class="faq-container animate-on-scroll delay-1">
                         <div class="faq-item">
-                            <div class="faq-question"> <span>Quais tipos de esquadrias vocês fabricam?</span> <i class="fas fa-plus"></i> </div>
+                            <div class="faq-question"> <span>Quais tipos de esquadrias vocês fabricam?</span> <i class="fa-solid fa-plus"></i> </div>
                             <div class="faq-answer"> <p>Fabricamos uma vasta gama de esquadrias de alumínio, incluindo portas, janelas, portões, guarda-corpos e fachadas, utilizando diversas linhas como Gold, Suprema, e outras, para atender a todos os tipos de projetos.</p> </div>
                         </div>
                         <div class="faq-item">
-                            <div class="faq-question"> <span>Vocês atendem apenas em Mogi das Cruzes?</span> <i class="fas fa-plus"></i> </div>
+                            <div class="faq-question"> <span>Vocês atendem apenas em Mogi das Cruzes?</span> <i class="fa-solid fa-plus"></i> </div>
                             <div class="faq-answer"> <p>Nossa base é em Mogi das Cruzes, mas atendemos todo o Alto Tietê, o litoral paulista e diversas outras regiões do estado de São Paulo. Consulte-nos sobre a viabilidade para a sua localidade.</p> </div>
                         </div>
                         <div class="faq-item">
-                            <div class="faq-question"> <span>Oferecem suporte para arquitetos e engenheiros?</span> <i class="fas fa-plus"></i> </div>
+                            <div class="faq-question"> <span>Oferecem suporte para arquitetos e engenheiros?</span> <i class="fa-solid fa-plus"></i> </div>
                             <div class="faq-answer"> <p>Sim! Oferecemos suporte técnico completo para profissionais da área, auxiliando na especificação dos produtos, detalhamento técnico e na escolha da linha mais adequada para garantir o melhor desempenho e estética para cada obra.</p> </div>
                         </div>
                     </div>
@@ -398,9 +424,9 @@
     
     <footer class="site-footer">
         <div class="footer-social">
-            <a href="#" aria-label="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="#" aria-label="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://wa.me/5511947550559" aria-label="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" aria-label="Instagram" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="Facebook" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://wa.me/5511947550559" aria-label="WhatsApp" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
         </div>
         <div class="footer-bottom">
             <p>Desenvolvido por <a href="https://wa.me/5511960573657?text=Ol%C3%A1!%20Vi%20o%20site%20do%20Murilo%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20seus%20servi%C3%A7os%20de%20desenvolvimento." target="_blank">Lucas Cabral</a></p>
@@ -410,12 +436,22 @@
     <script>
     document.addEventListener('DOMContentLoaded', () => {
         const body = document.body;
+        const preloader = document.getElementById('preloader');
         const header = document.querySelector('.site-header');
         const backToTopBtn = document.getElementById('backToTopBtn');
         const mobileToggle = document.querySelector('.mobile-menu-toggle');
         const mobileClose = document.querySelector('.mobile-menu-close');
         const mobileOverlay = document.querySelector('.mobile-menu-overlay');
         
+        // Lógica da Loading Page
+        if (preloader) {
+            body.classList.add('no-scroll');
+            setTimeout(() => {
+                preloader.classList.add('hidden');
+                body.classList.remove('no-scroll');
+            }, 3000);
+        }
+
         // Lógica do Header e Botão "Voltar ao Topo"
         window.addEventListener('scroll', () => {
             if (header) {
