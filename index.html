@@ -135,14 +135,20 @@
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
+            padding: 1rem;
         }
         .lightbox.show { opacity: 1; visibility: visible; }
-        .lightbox-content { position: relative; max-width: 95%; max-height: 85%; }
-        .lightbox-content img { width: 100%; height: 100%; object-fit: contain; display: block; }
+        .lightbox-content { position: relative; }
+        .lightbox-content img {
+            display: block;
+            object-fit: contain;
+            max-width: 90vw; /* <<< ALTERAÇÃO AQUI */
+            max-height: 90vh; /* <<< ALTERAÇÃO AQUI */
+        }
         .lightbox-close {
             position: absolute;
-            top: 1rem;
-            right: 1.5rem;
+            top: -0.5rem;
+            right: -0.5rem;
             color: white;
             font-size: 2.5rem;
             cursor: pointer;
@@ -163,7 +169,7 @@
         /* --- SEÇÃO PROJETOS (GALERIA MASONRY) --- */
         .portfolio-gallery { padding: 6rem 2rem; background-color: var(--color-light-gray); }
         .gallery-columns { columns: 3; column-gap: 1.5rem; }
-        .gallery-item { margin-bottom: 1.5rem; break-inside: avoid; position: relative; overflow: hidden; border-radius: 5px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .gallery-item { margin-bottom: 1.5rem; break-inside: avoid; position: relative; overflow: hidden; border-radius: 5px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); cursor: pointer; }
         .gallery-item img { width: 100%; height: auto; display: block; transition: transform 0.4s ease; }
         .gallery-item:hover img { transform: scale(1.05); }
 
@@ -180,7 +186,7 @@
         .gallery-sticky-container { display: flex; gap: 1rem; max-width: 1400px; margin: 0 auto; }
         .gallery-column { flex: 1; display: flex; flex-direction: column; gap: 1rem; padding-top: 6rem; padding-bottom: 6rem; }
         .gallery-column.sticky { position: sticky; top: 160px; height: 100vh; justify-content: center; }
-        .gallery-column figure { margin: 0; width: 100%; }
+        .gallery-column figure { margin: 0; width: 100%; cursor: pointer; }
         .gallery-column img { width: 100%; height: auto; object-fit: cover; border-radius: 5px; }
         .gallery-column.sticky img { height: 100%; max-height: 30vh; }
         
@@ -242,9 +248,6 @@
             .gallery-sticky-container { flex-direction: column; }
             .gallery-sticky-container .gallery-column { padding-top: 1rem; padding-bottom: 1rem; }
             .gallery-column.sticky { position: static; height: auto; }
-            .gallery-item, .gallery-column figure {
-                cursor: pointer;
-            }
             .contact-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 768px) {
@@ -304,7 +307,7 @@
     </div>
 
     <button id="backToTopBtn" title="Voltar ao topo"><i class="fa-solid fa-arrow-up"></i></button>
-    <a href="https://wa.me/5511947550559" class="whatsapp-float" target="_blank" aria-label="WhatsApp"> <i class="fa-brands fa-whatsapp"></i> </a>
+    <a href="https://wa.me/5511912395075" class="whatsapp-float" target="_blank" aria-label="WhatsApp"> <i class="fa-brands fa-whatsapp"></i> </a>
     
     <main>
           <section class="hero-section" id="home">
@@ -413,7 +416,7 @@
                         <h2>Entre em Contato</h2>
                         <div class="contact-info-item">
                             <i class="fa-brands fa-whatsapp"></i>
-                            <span>(11) 94755-0559</span>
+                            <span>(11) 91239-5075</span>
                         </div>
                         <div class="contact-info-item">
                             <i class="fa-solid fa-envelope"></i>
@@ -447,11 +450,11 @@
         </section>
 
         <section class="map-section" id="localizacao">
-             <div class="container">
+               <div class="container">
                 <div class="section-title-wrapper animate-on-scroll"> <h2 class="section-title">Onde nos Encontrar</h2> </div>
                 <div class="map-container animate-on-scroll delay-1">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3658.237847332463!2d-46.205402299999996!3d-23.5239463!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cdd808c219a4b5%3A0x6d94e98c6b1369f0!2sBJ%20ESQUADRIAS%20DE%20ALUMINIO!5e0!3m2!1spt-BR!2sbr!4v1759255228462!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>                </div>
-             </div>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3658.237847332463!2d-46.205402299999996!3d-23.5239463!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cdd808c219a4b5%3A0x6d94e98c6b1369f0!2sBJ%20ESQUADRIAS%20DE%20ALUMINIO!5e0!3m2!1spt-BR!2sbr!4v1759255228462!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>                 </div>
+               </div>
         </section>
 
         <section class="faq-section" id="faq">
@@ -494,7 +497,7 @@
         <div class="footer-social">
             <a href="#" aria-label="Instagram" target="_blank"><i class="fa-brands fa-instagram"></i></a>
             <a href="#" aria-label="Facebook" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="https://wa.me/5511947550559" aria-label="WhatsApp" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://wa.me/5511912395075" aria-label="WhatsApp" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
         </div>
         <div class="footer-bottom">
             <p>Desenvolvido por <a href="https://wa.me/5511960573657?text=Ol%C3%A1!%20Vi%20o%20site%20do%20Murilo%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20seus%20servi%C3%A7os%20de%20desenvolvimento." target="_blank">Lucas Cabral</a></p>
@@ -502,9 +505,9 @@
     </footer>
 
     <div class="lightbox" id="lightbox">
-        <button class="lightbox-close" id="lightboxClose" aria-label="Fechar Imagem"><i class="fa-light fa-xmark"></i></button>
         <div class="lightbox-content">
             <img src="" alt="Imagem ampliada do projeto" id="lightboxImg">
+            <button class="lightbox-close" id="lightboxClose" aria-label="Fechar Imagem"><i class="fa-light fa-xmark"></i></button>
         </div>
     </div>
 
@@ -595,7 +598,7 @@
                 const email = formData.get('email');
                 const phone = formData.get('phone');
                 const message = formData.get('message');
-                const companyPhone = '5511947550559'; 
+                const companyPhone = '5511912395075'; 
 
                 let whatsappMessage = `*Novo Pedido de Orçamento (Portfólio Murilo)*\n\n`;
                 whatsappMessage += `*Nome:* ${name}\n`;
@@ -700,15 +703,12 @@
 
         // Lógica do Lightbox
         if (lightbox && lightboxImg && lightboxClose) {
-            document.querySelectorAll('.gallery-item').forEach(item => {
+            document.querySelectorAll('.gallery-item, .gallery-column figure').forEach(item => {
                 item.addEventListener('click', () => {
-                    // Ativar lightbox apenas em telas menores (mobile/tablet)
-                    if (window.innerWidth <= 992) {
-                        const imgSrc = item.querySelector('img').src;
-                        lightboxImg.src = imgSrc;
-                        lightbox.classList.add('show');
-                        body.classList.add('no-scroll');
-                    }
+                    const imgSrc = item.querySelector('img').src;
+                    lightboxImg.src = imgSrc;
+                    lightbox.classList.add('show');
+                    body.classList.add('no-scroll');
                 });
             });
 
